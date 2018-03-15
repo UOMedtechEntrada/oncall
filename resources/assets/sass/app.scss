@@ -1,0 +1,118 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+ .navbar {
+   min-height:80px;
+   background-color:rgb(143, 0, 26);
+
+}
+.navbar-brand img{
+  padding:1rem;
+}
+
+.btn-primary{
+  background-color:rgb(143, 0, 26);
+}
+select{
+  width:100%;
+  height:30px;
+}
+
+/*admin Portal*/
+
+.card{
+  background-color:#fff;
+  width:30rem;
+  float:left;
+  position:relative;
+  margin:2rem;
+  .card-header{
+    font-size: 14px;
+    background-color:rgb(143, 0, 26);
+    color:#fff;
+    padding:1rem;
+  }
+}
+body {
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-size: 14px;
+  color: #444;
+}
+
+table {
+  border: 2px solid rgb(67, 67, 67);
+  border-radius: 3px;
+  background-color: #fff;
+  width:100%;
+
+}
+
+th {
+  background-color: rgb(100, 100, 100);
+  color: rgba(255,255,255,0.66);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th, td {
+  min-width: 120px;
+  padding: 10px 20px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
+}
+.call-to-action{
+  height:14rem;
+  .number{
+    font-size: 5rem;
+    color:#fff;
+  }
+  .text{
+    font-size:2rem;
+    color:#fff;
+  }
+  span{
+    margin:5px;
+  }
+
+}
