@@ -1,40 +1,40 @@
-# Laravel 5.0 for Laravel Shift
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-This repository contains the latest version of Laravel 5.0. It is used as a reference by [Laravel Shift - the automated way to upgrade Laravel applications](https://laravelshift.com).
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+</p>
 
-## Laravel Shift
-*Laravel Shift* focuses on providing automated and [human services](https://laravelshift.com/human-services) for upgrading and improving your Laravel applications.
+## About Laravel
 
-Shifts for *Laravel* include:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
-- [Laravel 5.0 Shift - upgrade from Laravel 4.2 to 5.0](https://laravelshift.com/upgrade-laravel-4.2-to-laravel-5.0)
-- [Laravel 5.1 Shift - upgrade from Laravel 5.0 to 5.1](https://laravelshift.com/upgrade-laravel-5.0-to-laravel-5.1) 
-- [Laravel 5.2 Shift - upgrade from Laravel 5.1 to 5.2](https://laravelshift.com/upgrade-laravel-5.1-to-laravel-5.2) 
-- [Laravel 5.3 Shift - upgrade from Laravel 5.2 to 5.3](https://laravelshift.com/upgrade-laravel-5.2-to-laravel-5.3)
-- [Laravel 5.4 Shift - upgrade from Laravel 5.3 to 5.4](https://laravelshift.com/upgrade-laravel-5.3-to-laravel-5.4)
-- [Laravel 5.5 Shift - upgrade from Laravel 5.4 to 5.5](https://laravelshift.com/upgrade-laravel-5.4-to-laravel-5.5)
-- [Laravel 5.6 Shift - upgrade from Laravel 5.5 to 5.6](https://laravelshift.com/upgrade-laravel-5.5-to-laravel-5.6)
-- [Laravel Tests Shift - upgrade tests from BrowserKit](https://laravelshift.com/upgrade-laravel-5.3-tests-to-laravel-5.4-tests)
-- [Laravel Linter - detect lint in your Laravel project](https://laravelshift.com/laravel-linter) 
-- [Consolidate Namespace Shift - condense custom namespaces with Laravel](https://laravelshift.com/laravel-consolidate-custom-namespaces)
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Shifts for *Lumen* include:
+Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
 
-- [Lumen 5.1 Shift - upgrade from Lumen 5.0 to 5.1](https://laravelshift.com/upgrade-lumen-5.0-to-lumen-5.1) 
-- [Lumen 5.2 Shift - upgrade from Lumen 5.1 to 5.2](https://laravelshift.com/upgrade-lumen-5.1-to-lumen-5.2) 
-- [Lumen 5.3 Shift - upgrade from Lumen 5.2 to 5.3](https://laravelshift.com/upgrade-lumen-5.2-to-lumen-5.3)
+## Learning Laravel
 
-Shifts for *Laravel Packages* include:
+Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
 
-- [Laravel Package 5.1 Shift - upgrade from Laravel 5.0 to 5.1](https://laravelshift.com/upgrade-laravel-package-5.0-to-5.1)
-- [Laravel Package 5.2 Shift - upgrade from Laravel 5.1 to 5.2](https://laravelshift.com/upgrade-laravel-package-5.1-to-5.2)
-- [Laravel Package 5.3 Shift - upgrade from Laravel 5.2 to 5.3](https://laravelshift.com/upgrade-laravel-package-5.2-to-5.3)
+If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
-Shifts for *PHP* include:
+## Contributing
 
-- [PHP 5.5 Shift - upgrade from PHP 5.x to 5.5](https://laravelshift.com/upgrade-php5-to-php5.5)
-- [PHP 5.6 Shift - upgrade from PHP 5.5 to 5.6](https://laravelshift.com/upgrade-php-5.5-to-php-5.6)
-- [PHP 7.0 Shift - upgrade from PHP 5.6 to 7.0](https://laravelshift.com/upgrade-php-5.6-to-php-7.0)
-- [PSR-2 - adopt the PSR-2 code style](https://laravelshift.com/upgrade-psr2-code-style-standard)
-- [PSR-4 - upgrade from PSR-0 to PSR-4](https://laravelshift.com/upgrade-namespace-psr0-psr4)
-- [Mysqli Shift - covert mysql to mysqli](https://laravelshift.com/upgrade-mysql-mysqli)
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

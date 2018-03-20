@@ -1114,7 +1114,8 @@ var routes = [{
   component: __WEBPACK_IMPORTED_MODULE_5__components_Example_vue___default.a
 }];
 
-var apiPath = "http://localhost:3000/";
+// var apiPath = "http://localhost:3000/";
+var apiPath = "http://oncall.localhost/";
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#block-number',
@@ -1203,14 +1204,37 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   computed: {
     accepted: function accepted() {
       return this.claimOptions.filter(function (i) {
-        console.log(i);
+        //console.log(i)
         return i.payment_approved === 'true';
       });
     },
     rejected: function rejected() {
       return this.claimOptions.filter(function (i) {
-        console.log(i);
+        //console.log(i)
         return i.payment_approved == 'false' || i.payment_approved == 'FALSE';
+      });
+    }
+  }
+}), new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+  el: '#xDayRule',
+  data: {
+    rules: [],
+    days: ''
+
+  },
+  created: function created() {
+    var _this5 = this;
+
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "rules").then(function (response) {
+      _this5.rules = response.data;
+    });
+  },
+
+  methods: {
+    updateDays: function updateDays() {
+      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.put(apiPath + "rules/1", {
+        type: 'xdays',
+        days: this.days
       });
     }
   }
@@ -1219,10 +1243,10 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   data: {
     options: []
   }, created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "funding_codes").then(function (response) {
-      _this5.options = response.data;
+      _this6.options = response.data;
     });
   }
 }), new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -1240,6 +1264,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
       payment_approved: 'true',
       user_id: '1',
       reason: ''
+
     },
     totals: {
       checkNBlockRuleActualList: [],
@@ -1251,39 +1276,55 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     serviceOptions: [],
     earningOptions: [],
     claimTypeOptions: []
-  }, _defineProperty(_data, 'earningOptions', []), _defineProperty(_data, 'siteOptions', []), _defineProperty(_data, 'master', []), _defineProperty(_data, 'message', ''), _data),
-  beforeMount: function beforeMount() {
-    this.dateLimit();
-  },
-  created: function created() {
-    var _this6 = this;
+  }, _defineProperty(_data, 'earningOptions', []), _defineProperty(_data, 'siteOptions', []), _defineProperty(_data, 'master', []), _defineProperty(_data, 'message', ''), _defineProperty(_data, 'minimumDays', []), _data),
 
-    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "blocks").then(function (response) {
-      _this6.stipends.blockOptions = response.data;
-    }), __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "mtd_services").then(function (response) {
-      _this6.serviceOptions = response.data;
-    }), __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "claim_type").then(function (response) {
-      _this6.claimTypeOptions = response.data;
-    }), __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "mtd_sites").then(function (response) {
-      _this6.siteOptions = response.data;
-    }), __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "funding_codes?block_id=" + this.stipends.block + "&claim_type_id=" + this.stipends.claimType).then(function (response) {
-      _this6.earningOptions = response.data;
-    }), __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "master_claims").then(function (response) {
-      _this6.master = response.data;
+  created: function created() {
+    var _this7 = this;
+
+    $('.alert-success').hide();
+    $('.alert-warning').hide();
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "rules?id=1").then(function (response) {
+      _this7.minimumDays = response.data;
     });
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "blocks").then(function (response) {
+      _this7.stipends.blockOptions = response.data;
+    });
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "mtd_services").then(function (response) {
+      _this7.serviceOptions = response.data;
+    });
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "claim_type").then(function (response) {
+      _this7.claimTypeOptions = response.data;
+    });
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "mtd_sites").then(function (response) {
+      _this7.siteOptions = response.data;
+    });
+
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "funding_codes?block_id=" + this.stipends.block + "&claim_type_id=" + this.stipends.claimType).then(function (response) {
+      _this7.earningOptions = response.data;
+    });
+    __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "master_claims").then(function (response) {
+      _this7.master = response.data;
+    });
+
     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "master_claims?block_id=" + this.stipends.block + "&service_id=" + this.stipends.serviceName + "&site_id=" + this.stipends.siteName).then(function (response) {
-      _this6.totals.checkNBlockRuleActualList = response.data;
+      _this7.totals.checkNBlockRuleActualList = response.data;
     });
     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "mtd_services?service_identifier=" + this.stipends.serviceName).then(function (response) {
-      _this6.totals.checkNBlockRuleMaxValue = response.data;
+      _this7.totals.checkNBlockRuleMaxValue = response.data;
     });
     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "master_claims?block_id=" + this.stipends.block + "&user_id=" + this.stipends.user_id).then(function (response) {
-      _this6.totals.checkInHospitalClaimRuleActualList = response.data;
+      _this7.totals.checkInHospitalClaimRuleActualList = response.data;
     });
   },
+  mounted: function mounted() {
+
+    this.dateLimit();
+  },
+
   methods: {
 
     addStipends: function addStipends() {
+
       this.saveData();
       this.checkNBlockRule();
       this.checkInHospitalClaimRule();
@@ -1300,16 +1341,18 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
       });
     },
     saveData: function saveData() {
-      var _this7 = this;
+      var _this8 = this;
 
+      //$('.alert-success').show();
+      console.log(this.stipends.payment_approved);
       __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "master_claims?block_id=" + this.stipends.block + "&service_id=" + this.stipends.serviceName + "&site_id=" + this.stipends.siteName).then(function (response) {
-        _this7.totals.checkNBlockRuleActualList = response.data;
+        _this8.totals.checkNBlockRuleActualList = response.data;
       });
       __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "mtd_services?service_identifier=" + this.stipends.serviceName).then(function (response) {
-        _this7.totals.checkNBlockRuleMaxValue = response.data;
+        _this8.totals.checkNBlockRuleMaxValue = response.data;
       });
       __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "master_claims?block_id=" + this.stipends.block + "&user_id=" + this.stipends.user_id).then(function (response) {
-        _this7.totals.checkInHospitalClaimRuleActualList = response.data;
+        _this8.totals.checkInHospitalClaimRuleActualList = response.data;
       });
       var value;
       var _iteratorNormalCompletion = true;
@@ -1319,8 +1362,6 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
       try {
         for (var _iterator = this.totals.checkNBlockRuleMaxValue[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           value = _step.value;
-
-          console.log(value.service_resident_count);
         }
       } catch (err) {
         _didIteratorError = true;
@@ -1338,10 +1379,15 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
       }
     },
     dateLimit: function dateLimit() {
+      var minDays;
+      var minimumDays = this.minimumDays;
+
+      console.log(minimumDays);
       $('.datepicker').datepicker({
         dateFormat: 'dd/mm/yy',
         maxDate: 0,
-        minDate: -90
+        minDate: -6
+
       });
     },
     checkNBlockRule: function checkNBlockRule() {
@@ -1350,7 +1396,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
       var maxValue = this.totals.checkNBlockRuleMaxValue.service_resident_count;
 
       if (actualValue + 1 > maxValue) {
-        this.stipends.payment_approved = 'false';
+        $('.alert-warning').show();
+        console.log(this.stipends.payment_approved);
         this.stipends.reason = "The total number of on-call claims for one service at one site for one block exceeds the Max value";
         this.message = "Your claim has been sent and will be reviewed shorty.";
       }
@@ -1365,22 +1412,24 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
       if (this.stipends.claimType != 1) {
         if (InHospitalClaimTotal + 1 > outHospitalMaxValue) {
-          this.stipends.payment_approved = 'false';
+          $('.alert-warning').show();
           this.stipends.reason = "Resident has made too many out-of-hospital claims";
+          this.message = "Your claim has been sent and will be reviewed shorty.";
         }
       } else {
         if (InHospitalClaimTotal + 1 > inHospitalMaxValue) {
-          this.stipends.payment_approved = 'false';
+          $('.alert-warning').show();
           this.stipends.reason = "Resident has made too many in-hospital claims";
+          this.message = "Your claim has been sent and will be reviewed shorty.";
         }
       }
     }
   }, computed: {
     codeChange: function codeChange() {
-      var _this8 = this;
+      var _this9 = this;
 
       __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "funding_codes?block_id=" + this.stipends.block + "&claim_type_id=" + this.stipends.claimType).then(function (response) {
-        _this8.earningOptions = response.data;
+        _this9.earningOptions = response.data;
       });
     }
 
@@ -1446,10 +1495,10 @@ var demo = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     gridColumns: ['id', 'payment_approved', 'created_date'],
     gridData: []
   }, created: function created() {
-    var _this9 = this;
+    var _this10 = this;
 
     __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(apiPath + "master_claims").then(function (response) {
-      _this9.gridData = response.data;
+      _this10.gridData = response.data;
     });
   },
 

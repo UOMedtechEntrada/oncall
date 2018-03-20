@@ -55,45 +55,47 @@
 
   </ul>-->
 
-  <div class="row" style="background:#fff; padding:10px; margin-top:3rem ">
+<div class="row" style="background:#fff; padding:10px; margin-top:3rem ">
   <h3> Claims </h3>
   <script type="text/x-template" id="grid-template">
-<table>
-  <thead>
-    <tr>
-      <th v-for="key in columns"
-        @click="sortBy(key)"
-        :class="{ active: sortKey == key }">
-        @{{ key | capitalize }}
-        <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-        </span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="entry in filteredData">
-      <td v-for="key in columns">
-        @{{entry[key]}}
-      </td>
-    </tr>
-  </tbody>
-</table>
-</script>
+    <table>
+      <thead>
+        <tr>
+          <th v-for="key in columns"
+            @click="sortBy(key)"
+            :class="{ active: sortKey == key }">
+            @{{ key | capitalize }}
+            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="entry in filteredData">
+          <td v-for="key in columns">
+            @{{entry[key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </script>
 
-<!-- demo root element -->
-<div id="demo">
-<form id="search" style="float:left; margin:10px;">
-  Search <input name="query" v-model="searchQuery">
-</form> <button style="float:left; margin-left:20px;"  class="btn btn-primary"> Print </button>
-<button style="float:left; margin-left:20px; " class="btn btn-primary"> Send </button>
-<demo-grid
-  :data="gridData"
-  :columns="gridColumns"
-  :filter-key="searchQuery">
-</demo-grid>
-</div>
-
+  <!-- demo root element -->
+  <div id="demo">
+      <form id="search" style="float:left; margin:10px;">
+        Search 
+        <input name="query" v-model="searchQuery">
+      </form> 
+      <button style="float:left; margin-left:20px;"  class="btn btn-primary"> Print </button>
+      <button style="float:left; margin-left:20px; " class="btn btn-primary"> Send </button>
+    <demo-grid
+      :data="gridData"
+      :columns="gridColumns"
+      :filter-key="searchQuery">
+    </demo-grid>
   </div>
+
+</div>
 
 
       <!-- <div class="row" style="margin-top:2rem;" >
@@ -188,9 +190,10 @@
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="call-to-action" style="background-color: #8f001a"><p class="text-center number">90</p>
+    <div class="col-md-4" id ="xDayRule">
+      <div class="call-to-action" style="background-color: #8f001a" ><input v-for="rule in rules"  style="width:100%; background:none; "  v-model="days" v-bind:value="rule.days" enabled ="false" class="text-center number"></input>
       <p class="text-center text"><span class="glyphicon glyphicon-remove"></span> Day Rule </p></div>
+        <a href="#" v-on:click="updateDays" class="btn btn-primary">Add</a>
     </div>
   </div>
 

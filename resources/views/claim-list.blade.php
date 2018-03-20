@@ -31,14 +31,14 @@
         </div><!-- /.container-fluid -->
       </nav>
       <div class="container" id="claim-list">
-      
         <ul class="list-group">
-    <li class="list-group-item" v-for="option in claimOptions">@{{option.id}}</li>
-  </ul>
-    </div>
-        <script src="{{asset('js/app.js')}}"></script>
-        <script src="{{asset('js/stipendsform.js')}}"></script>
-        <script src="{{asset('js/bootstrap.js')}}"></script>
+          <li class="list-group-item" v-for="option in claimOptions">@{{option.id}}</li>
+        </ul>
+      </div>
+      
+      <script src="{{asset('js/app.js')}}"></script>
+      <script src="{{asset('js/stipendsform.js')}}"></script>
+      <script src="{{asset('js/bootstrap.js')}}"></script>
 
 
     </body>

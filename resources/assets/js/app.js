@@ -7,6 +7,8 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios);
 
+
+
 import App from './App.vue';
 import Example from './components/Example.vue';
 
@@ -19,8 +21,8 @@ const routes = [
   }
 ];
 
-var apiPath = "http://localhost:3000/";
-
+//var apiPath = "http://localhost:3000/";
+var apiPath = "http://oncall.localhost/";
 
 new Vue({
   el: '#block-number',
@@ -49,6 +51,7 @@ new Vue({
       }
     }
 }),
+
 new Vue({
   el: '#service-name',
   data: {
@@ -76,6 +79,7 @@ new Vue({
     ]
   }
 }),
+
 new Vue({
   el: '#claim-type',
   data: {
@@ -97,6 +101,7 @@ new Vue({
       }
     }
 }),
+
 new Vue({
  el: '#claim-list',
   data: {
@@ -108,18 +113,42 @@ new Vue({
   }, computed: {
     accepted: function() {
       return this.claimOptions.filter(function(i) {
-        console.log(i)
+        //console.log(i)
         return i.payment_approved === 'true'
       })
     },
     rejected: function() {
       return this.claimOptions.filter(function(i) {
-        console.log(i)
+        //console.log(i)
         return i.payment_approved == 'false' ||i.payment_approved == 'FALSE'
       })
     }
   }
 }),
+
+new Vue({
+ el: '#xDayRule',
+  data: {
+    rules: [
+    ],
+    days: ''
+
+  },
+  created(){
+    axios.get(apiPath+"rules")
+    .then(response => {this.rules = response.data});
+  },
+  methods:{
+      updateDays: function() {
+        axios.put(apiPath+"rules/1",{
+          type:'xdays',
+          days: this.days
+        });
+
+        }
+  }
+}),
+
 new Vue({
   el: '#earning-codes',
   data: {
@@ -145,6 +174,7 @@ new Vue({
       payment_approved:'true',
       user_id: '1',
       reason:''
+
     },
     totals: {
       checkNBlockRuleActualList: [],
@@ -159,30 +189,48 @@ new Vue({
     earningOptions:[],
     siteOptions:[],
     master:[],
-    message:''
+    message:'',
+    minimumDays:[]
 
-  },created(){
+
+
+  },
+
+  created(){
+    $('.alert-success').hide();
+    $('.alert-warning').hide();
+    axios.get(apiPath+"rules?id=1").then(response => {this.minimumDays = response.data});
     axios.get(apiPath+"blocks")
-    .then(response => {this.stipends.blockOptions = response.data}),
+    .then(response => {this.stipends.blockOptions = response.data});
     axios.get(apiPath+"mtd_services")
-    .then(response => {this.serviceOptions = response.data}),
+    .then(response => {this.serviceOptions = response.data});
     axios.get(apiPath+"claim_type")
-    .then(response => {this.claimTypeOptions = response.data}),
+    .then(response => {this.claimTypeOptions = response.data});
     axios.get(apiPath+"mtd_sites")
-    .then(response => {this.siteOptions = response.data}),
+    .then(response => {this.siteOptions = response.data});
+
 
     axios.get(apiPath+"funding_codes?block_id="+this.stipends.block+"&claim_type_id="+this.stipends.claimType)
-    .then(response => {this.earningOptions = response.data}),
+    .then(response => {this.earningOptions = response.data});
     axios.get(apiPath+"master_claims")
-    .then(response => {this.master = response.data})
+    .then(response => {this.master = response.data});
+
     axios.get(apiPath+"master_claims?block_id="+this.stipends.block+"&service_id="+this.stipends.serviceName+"&site_id="+this.stipends.siteName).then(response => {this.totals.checkNBlockRuleActualList = response.data});
     axios.get(apiPath+"mtd_services?service_identifier="+this.stipends.serviceName).then(response => {this.totals.checkNBlockRuleMaxValue = response.data});
     axios.get(apiPath+"master_claims?block_id="+this.stipends.block+"&user_id="+this.stipends.user_id).then(response => {this.totals.checkInHospitalClaimRuleActualList = response.data});
 
-  }
-  ,methods:{
+
+  },
+  mounted(){
+
+    this.dateLimit();
+
+
+  },
+  methods:{
 
     addStipends: function() {
+
       this.saveData();
       this.checkNBlockRule();
       this.checkInHospitalClaimRule();
@@ -200,14 +248,31 @@ new Vue({
 
     },
     saveData: function(){
-
+      //$('.alert-success').show();
+      console.log(this.stipends.payment_approved);
        axios.get(apiPath+"master_claims?block_id="+this.stipends.block+"&service_id="+this.stipends.serviceName+"&site_id="+this.stipends.siteName).then(response => {this.totals.checkNBlockRuleActualList = response.data});
        axios.get(apiPath+"mtd_services?service_identifier="+this.stipends.serviceName).then(response => {this.totals.checkNBlockRuleMaxValue = response.data});
        axios.get(apiPath+"master_claims?block_id="+this.stipends.block+"&user_id="+this.stipends.user_id).then(response => {this.totals.checkInHospitalClaimRuleActualList = response.data});
        var value;
        for (value of this.totals.checkNBlockRuleMaxValue){
-         console.log(value.service_resident_count);
+
        }
+    },
+    dateLimit: function(){
+      var minDays;
+      var minimumDays = this.minimumDays
+
+
+
+      console.log(minimumDays);
+      $('.datepicker').datepicker({
+          dateFormat: 'dd/mm/yy',
+          maxDate: 0,
+          minDate:-6
+
+      });
+
+
     },
     checkNBlockRule: function(){
 
@@ -215,12 +280,13 @@ new Vue({
       var maxValue = this.totals.checkNBlockRuleMaxValue.service_resident_count;
 
       if ((actualValue+1) > maxValue){
-        this.stipends.payment_approved = 'false';
+        $('.alert-warning').show();
+        console.log(this.stipends.payment_approved);
         this.stipends.reason = "The total number of on-call claims for one service at one site for one block exceeds the Max value";
         this.message = "Your claim has been sent and will be reviewed shorty.";
       }
     },
-    
+
     checkInHospitalClaimRule: function(){
 
       var InHospitalClaimTotal = this.totals.checkInHospitalClaimRuleActualList.length;
@@ -230,13 +296,15 @@ new Vue({
 
       if(this.stipends.claimType != 1){
          if(InHospitalClaimTotal+1 > outHospitalMaxValue){
-            this.stipends.payment_approved = 'false';
+            $('.alert-warning').show();
             this.stipends.reason = "Resident has made too many out-of-hospital claims";
+              this.message = "Your claim has been sent and will be reviewed shorty.";
          }
       } else {
           if(InHospitalClaimTotal+1 > inHospitalMaxValue){
-            this.stipends.payment_approved = 'false';
+            $('.alert-warning').show();
             this.stipends.reason = "Resident has made too many in-hospital claims";
+              this.message = "Your claim has been sent and will be reviewed shorty.";
           }
       }
     }

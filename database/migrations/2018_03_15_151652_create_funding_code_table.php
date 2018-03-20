@@ -21,43 +21,53 @@ class CreateFundingCodeTable extends Migration {
 				 $table->integer('claim_type_id');
 		 });
 		 DB::table('funding_codes')->insert(
-        array(
-					[
-            'funding_identifier' => '9901',
-            'funding_code_detail' => 'MOH Funding',
-					],
-					[
-            'funding_identifier' => '9905',
-            'funding_code_detail' => 'MOH OIMG Funding'
-					],
-					[
-            'funding_identifier' => '9909',
-            'funding_code_detail' => 'MOH Trasfer Fund',
-						'block_id' => 1,
-						'claim_type_id'=> 1
-					],
-					[
-            'funding_identifier' => '9994',
-            'funding_code_detail' => 'Return from Leave Status',
-						'block_id' => 1,
-						'claim_type_id'=> 2
-					],
-					[
-						'funding_identifier' => '9902',
-						'funding_code_detail' => 'MOH CIP Funding',
-						'block_id' => 1,
-						'claim_type_id'=> 3
-					],
-					[
-						'funding_identifier' => '9906',
-						'funding_code_detail' => 'MOH DIMG Funding',
-						'block_id' => 1,
-						'claim_type_id'=> 4
-					],
+	        array(
+				[
+		            'funding_identifier' => '9901',
+		            'funding_code_detail' => 'MOH Funding',
+		            'funding_code_comment' => '',
+		            'block_id' => 1,
+		            'claim_type_id' => 0
+				],
+				[
+		            'funding_identifier' => '9905',
+		            'funding_code_detail' => 'MOH OIMG Funding',
+		            'funding_code_comment' => '',
+		            'block_id' => 1,
+		            'claim_type_id' => 1
+				],
+				[
+		            'funding_identifier' => '9909',
+		            'funding_code_detail' => 'MOH Trasfer Fund',
+		            'funding_code_comment' => '',
+					'block_id' => 1,
+					'claim_type_id' => 2
+				],
+				[
+		            'funding_identifier' => '9994',
+		            'funding_code_detail' => 'Return from Leave Status',
+		            'funding_code_comment' => '',
+					'block_id' => 1,
+					'claim_type_id'=> 3
+				],
+				[
+					'funding_identifier' => '9902',
+					'funding_code_detail' => 'MOH CIP Funding',
+					'funding_code_comment' => '',
+					'block_id' => 1,
+					'claim_type_id'=> 4
+				],
+				[
+					'funding_identifier' => '9906',
+					'funding_code_detail' => 'MOH DIMG Funding',
+					'funding_code_comment' => '',
+					'block_id' => 1,
+					'claim_type_id'=> 5
+				],
 
-        )
+	        )
 
-    );
+	    );
 	}
 
 	/**

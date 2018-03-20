@@ -15,24 +15,18 @@ class CreateClaimTypeTable extends Migration {
 			Schema::create('claim_types', function (Blueprint $table) {
 					 $table->increments('id');
 					 $table->string('name');
-			 });
-			 DB::table('claim_types')->insert(
-			 array(
-				 	[
-					 		'name' => 'In Hospital',
-					 ],
-					 [
-							'name' => 'Out of Hospital',
-					 ],
-					 [
-							'name' => 'Qualifying',
-					 ],
-					 [
-						 	'name' => 'Dimention of Care',
-					 ],
-					 [
-						 	'name' => 'Rounding',
-					 ]
+			});
+		
+			DB::table('claim_types')->insert(
+		        array(
+					['name' => 'In Hospital'],
+					['name' => 'Out of Hospital'],
+					['name' => 'Qualifying'],
+					['name' => 'Dimention of Care'],
+					['name' => 'Rounding']
+		        )
+
+		    );
 
 	}
 
@@ -43,7 +37,7 @@ class CreateClaimTypeTable extends Migration {
 	 */
 	public function down()
 	{
-	 	Schema::drop('blocks');
+	 	Schema::drop('claim_types');
 	}
 
 }
