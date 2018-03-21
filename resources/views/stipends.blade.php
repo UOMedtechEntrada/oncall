@@ -2,16 +2,14 @@
 
 <html lang="{{ app()->getLocale() }}">
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}"/>
+        <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <title>On-Call Demand</title>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.3/chosen.css">
-
-
-
     </head>
     <body>
       <nav class="navbar navbar-default">
@@ -58,8 +56,8 @@
         <div class="form-group" > <!-- Subject field -->
           <label class="control-label " for="block-number">Block Number / Numéro de bloc</label>
           <!--<input class="form-control" id="block-number" name="block-number" type="select"/>-->
-          <select v-model="stipends.block" name="block_number" id="block-number" v-on:change="codeChange" class="chosen-select">
-              <option v-for="option in stipends.blockOptions" v-bind:value="option.block_number">
+          <select v-model="stipends.block" name="block_number" id="block-number" v-on:change="codeChange()" class="chosen-select">
+              <option v-for="option in stipends.options" v-bind:value="option.block_number">
                 @{{ option.block_identifier }}
               </option>
           </select>
@@ -111,13 +109,18 @@
         <div v-for="day in minimumDays" >@{{day.days}}</div>
       </form>
     </div>
+    <script>
+           window.Laravel = <?php echo json_encode([
+               'csrfToken' => csrf_token(),
+                    ]); ?>
+          </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.3/chosen.jquery.js"></script>
 
     <script src="{{URL::asset('js/app.js')}}"></script>
-    <script src="{{URL::asset('js/bootstrap.js')}}"></script>
+    <!--<script src="{{URL::asset('js/bootstrap.js')}}"></script>-->
 
 <script>
   $(document).ready(function () {

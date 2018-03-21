@@ -29,3 +29,13 @@ Route::get('stipends', function () {
 Route::get('landing', function () {
     return view('landing');
   });
+
+Route::resource('api/blocks', 'BlockController');
+Route::resource('api/master_claims', 'MasterClaimsController');
+Route::resource('api/claim_type', 'ClaimTypeController');
+Route::resource('api/mtd_services', 'MtdServiceController');
+Route::resource('api/mtd_sites', 'MtdSitesController');
+Route::resource('api/funding_codes', 'FundingCodesController');
+Route::resource('api/rules', 'RulesController');
+
+

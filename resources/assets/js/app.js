@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 import Vue from 'vue';
 
 import VueRouter from 'vue-router';
@@ -22,7 +24,7 @@ const routes = [
 ];
 
 //var apiPath = "http://localhost:3000/";
-var apiPath = "http://oncall.localhost/";
+var apiPath = "http://oncall.localhost/api/";
 
 new Vue({
   el: '#block-number',
@@ -33,10 +35,20 @@ new Vue({
       newBlock:''
     }
   },created(){
-    axios.get(apiPath+"blocks")
-    .then(response => {this.stipends.options = response.data})
-  }
-  , methods:{
+    console.log(axios.get(apiPath+"blocks"));
+    // axios.get(apiPath+"blocks")
+    // .then(response => {this.stipends.options = response.data})
+    axios.get(apiPath+'blocks')
+    .then(response => { 
+      this.stipends.options = response.data;
+    })
+    .catch(error => {
+      console.log(error)
+      console.log(error.response)
+    });
+
+    
+  }, methods:{
       addBlock: function(){
         axios.post(apiPath+"blocks", {
         block_identifier:this.stipends.newBlock
@@ -174,28 +186,23 @@ new Vue({
       payment_approved:'true',
       user_id: '1',
       reason:''
-
     },
     totals: {
       checkNBlockRuleActualList: [],
       checkNBlockRuleMaxValue:[],
       checkInHospitalClaimRuleActualList:[],
       checkInHospitalClaimRuleMaxValue:''
-
     },
     serviceOptions: [],
     earningOptions:[],
     claimTypeOptions:[],
     earningOptions:[],
     siteOptions:[],
+    blockOptions: [],
     master:[],
     message:'',
     minimumDays:[]
-
-
-
   },
-
   created(){
     $('.alert-success').hide();
     $('.alert-warning').hide();

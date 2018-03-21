@@ -1,6 +1,6 @@
 
 window._ = require('lodash');
-
+window.Vue = require('Vue');
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -8,9 +8,11 @@ window._ = require('lodash');
  */
 
 try {
-   global.$ = global.jQuery = require('jquery');
+   global.$ = global.jQuery = require('jquery'); 
+   require('bootstrap-datepicker');
+   require('chosen-js');
 
-    require('bootstrap-sass');
+   require('bootstrap-sass');
 } catch (e) {}
 
 /**
@@ -36,6 +38,12 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+// Vue.http.interceptors.push((request, next) => {
+//     request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+
+//     next();
+// });
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
